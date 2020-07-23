@@ -42,7 +42,7 @@ def implot(ax, lowers):
                        norm = None,
                        origin=None,
                        clip_on=False)
-        img_arr = Image.open('Draw/'+str(lower)+'img.png')
+        img_arr = Image.open('Draw/GraphletImages/'+str(lower)+'img.png')
         img = trim(img_arr)
         img.thumbnail((265,256), Image.ANTIALIAS)
         
