@@ -69,6 +69,11 @@ class Graphlet:
 
         self.edges = kwargs['edges'] if 'edges' in kwargs else edgesFromFile(self.lower_decimal)
 
+    def getDensity(self):
+        global K
+        total_edges = K * (K-1) // 2
+        return self.edges / total_edges
+
     def isTree(self):
         global K
         return self.edges == K - 1
@@ -86,11 +91,3 @@ class Graphlet:
         rows = np.where(edges == K - 1)
         return canon_list[rows[0],0][0] == self.lower_ord
 
-if __name__ == "__main__":
-    global K
-    K = 5
-    set_canon_list()
-    set_upperToLower()
-    for o in range(9,30):
-        g = Graphlet(orca=o)
-        print(o, g.lower_decimal, g.isTree(), g.isStar(), g.isClique())

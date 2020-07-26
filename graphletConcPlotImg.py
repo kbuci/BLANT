@@ -47,29 +47,12 @@ def implot(ax, lowers):
         img.thumbnail((265,256), Image.ANTIALIAS)
         
         bbox_image.set_data(img)
-        ax.add_artist(bbox_image)
-        
-        prect = patches.Rectangle((idx-.5,ymin),1,ydist,color="Red" if idx % 2 == 0 else "Blue",
-                               fill=False,clip_on=False)
-        #ax.add_patch(prect)
-    
+        ax.add_artist(bbox_image)    
 
 
 def plotConcFiles(concFiles, k):
-    def writeShape(g):
-        ret = str(g.lower_decimal)
-        if g.isStar():
-            return ret + "*"
-        if g.isTree():
-            return ret + "T"
-        if g.isClique():
-            return ret + "C"
-        return ret
-
     fig = plt.figure(figsize=(30,10))
     ax = fig.add_subplot(111)
-
-    
 
     graphlet.K = k
     print(graphlet.K)
