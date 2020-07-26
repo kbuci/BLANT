@@ -55,7 +55,7 @@ def implot(ax, lowers):
     
 
 
-def plotConcFiles(concFiles, k):
+def plotConcFiles(concFiles, k, top):
     def writeShape(g):
         ret = str(g.lower_decimal)
         if g.isStar():
@@ -84,7 +84,7 @@ def plotConcFiles(concFiles, k):
     graphletRows = [i for i in range(len(graphlets))]
     for concFile in concFiles: 
         concData = np.loadtxt(concFile, dtype={'names':('conc','lower'),'formats':('float','int')})
-        topGraphletRows = topGraphletRows.union(set(sorted(graphletRows, reverse=True, key=lambda row: concData[row][0])[:5]))
+        topGraphletRows = topGraphletRows.union(set(sorted(graphletRows, reverse=True, key=lambda row: concData[row][0])[:top]))
     
     print(topGraphletRows)
     topGraphletRows = sorted(list(topGraphletRows),key = lambda row: graphlets[row].lower_decimal)
@@ -107,16 +107,15 @@ def plotConcFiles(concFiles, k):
     
     #plt.rc('ytick', labelsize=30)
     plt.xticks(range(len(graphlets)), [(graphlet.lower_decimal,round(graphlet.getDensity(),3)) for graphlet in graphlets])
-    fig.suptitle("BLANT sampling MCMC top 5 concentrations for each graph ", fontsize=30)
+    fig.suptitle("BLANT sampling MCMC top " + str(top) + " concentrations for each graph ", fontsize=30)
     plt.legend(plots, [path.split(fil)[-1] for fil in concFiles], bbox_to_anchor=(1,1), loc = 1, prop={'size':20})    
     plt.savefig("squiggly_plot_conc_k" + str(k) + "_top_values_union.png")
-    
     
 
 
 
 if __name__ == '__main__':
-    plotConcFiles(sys.argv[1:-1],int(sys.argv[-1]))
+    plotConcFiles(sys.argv[1:-2],int(sys.argv[-2]),int(sys.argv[-1]))
 
 
 
