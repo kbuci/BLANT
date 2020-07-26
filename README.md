@@ -20,3 +20,5 @@ To generate images of the graphlets for the concentrations use the alternate scr
 
 `python3 graphletConcPlotImg.py blant_output_1 blant_output_2 ... blant_output_n k`
 
+Note that this latter script requires every "Tree"/"Star"/clique graphlet for the given k to be included as a image in /Draw/GraphletImages
+as \[lower_ordinal of graphlet\]img.png
